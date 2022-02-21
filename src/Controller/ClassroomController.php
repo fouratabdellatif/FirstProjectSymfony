@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Classroom;
+use App\Form\ClassroomType;
 use App\Repository\ClassroomRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -45,19 +47,23 @@ class ClassroomController extends AbstractController
     }
 
     /**
-     * @Route("/classroom/list/addClass/{name}", name="add_class")
+     * @Route("/classroom/list/addClass", name="add_class")
      */
-    public function addClassroom($name): Response
+    public function addClassroom(Request $req): Response
     {
         $c = new Classroom();
-        $c->setName($name);
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($c);
-        $em->flush();
-        return $this->redirectToRoute("list_classroom");
-        /*return $this->render('classroom/class.html.twig', [
-            'class' => $c,
-        ]);*/
+        $form = $this->createForm(ClassroomType::class, $c);
+        /*$c->setName($name);*/
+        $form->handleRequest($req);
+        if($form->isSubmitted()){
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($c);
+            $em->flush();
+            return $this->redirectToRoute("list_classroom");
+        }
+        return $this->render('classroom/add.html.twig', [
+            'myForm' => $form->createView(),
+        ]);
     }
 
     /**
