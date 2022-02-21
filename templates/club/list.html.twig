@@ -1,0 +1,66 @@
+<ul>
+    {% for i in formations %}
+    <li>{{ i.ref }} ** {{ i.Titre | upper }}</li>
+    {% endfor %}
+  </ul>
+  
+  le nombre de formation est : {{ formations | length }}
+  
+  {# question 5 #}
+  <ul>
+    {% for i in formations %}
+     {% if i.Description == "formation theorique" %}
+    <li>{{ i.Titre }}</li>
+    {% endif %}
+     {% endfor %}
+  </ul>
+  
+  
+  {# question 6 #}
+  
+  <ul>
+  {% set nb=0 %}
+  {% set total=0 %}
+  {% set titreF="" %}
+    {% for i in formations %}
+    {% set total = total+ i.nb_participants %}
+    {% set nb = max(nb , i.nb_participants ) %}
+  {% set titreF = i.Titre %}
+    
+    
+     {% endfor %}
+  </ul>
+  
+  
+  Titre de formation :{{ titreF }}  <br />
+  {# question 7 #}
+  le nombre total :{{ total }}
+  
+  
+  {# question 8 #}
+  
+  {% if formations is empty %}
+  <h1> tableau vide</h1>
+  {% else %}
+  <ul>
+       {% for i in formations %}
+  
+     <li>{{ i.ref }} ** {{ i.Titre | upper }}</li>
+    
+     {% endfor %}
+     </ul>
+  {% endif %}
+  
+  {# question 9 #}
+  
+  
+    {% for i in formations %}
+       <li>{{ i.ref }} ** {{ i.Titre | upper }}  {% if i.nb_participants == 0 %}
+       <button> participer </button>
+      {% endif %} </li>
+     
+      
+    
+    
+     {% endfor %}
+  </ul>
