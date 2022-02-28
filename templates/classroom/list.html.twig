@@ -2,5 +2,7 @@
 <ul>
   {% for c in list %}
   <li>{{ c.id }} ** {{ c.name }}</li>
+  <a href="{{ path('update_class', { id: c.id }) }}">Update</a>
+  <a href="{{ path('delete_class', { id: c.id }) }}">Delete</a>
   {% endfor %}
 </ul>
