@@ -1,0 +1,8 @@
+<h1>Student:</h1>
+{% if student %}
+<h3>
+  id: {{ student.id }} --- name: {{ student.name }} --- classroom: {{ student.classroomId.nom }}
+</h3>
+{% else %}
+<h3>no student with this id</h3>
+{% endif %}
