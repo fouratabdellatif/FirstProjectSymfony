@@ -1,8 +1,8 @@
 <h1>List of students</h1>
 <ul>
   {% for s in list %}
-  <li>{{ s.id }} ** {{ s.name }}</li>
-  <a href="{{ path('update_student', { id: s.id }) }}">Update</a>
-  <a href="{{ path('delete_student', { id: s.id }) }}">Delete</a>
+  <li>{{ s.nsc }} ** {{ s.email }}</li>
+  <a href="{{ path('update_student', { id: s.nsc }) }}">Update</a>
+  <a href="{{ path('delete_student', { id: s.nsc }) }}">Delete</a>
   {% endfor %}
 </ul>
